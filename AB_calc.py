@@ -20,6 +20,9 @@ def date_to_string(user):
     out = month+'/'+day+'/'+year
     return out
 
+def int_to_day(num):
+    days = ('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday')
+    return days[num]
 
 cal = c.TextCalendar(6)
 start = "08/20/2019"#input("input school start date: MM/DD/YYYY\n")
@@ -28,4 +31,4 @@ start = string_to_date(start)
 end = string_to_date(end)
 print(d.date.today())
 for i in (start,end):
-    print(d.date.weekday(i))
+    print(int_to_day(d.date.weekday(i)))
