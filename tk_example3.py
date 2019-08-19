@@ -38,7 +38,7 @@ ttk.Button(mainframe,text='Calculate',command=calculate).grid(column=4,row=2,sti
 
 ttk.Label(mainframe,text='Month').grid(column=2,  row=1, sticky=W)
 ttk.Label(mainframe,text='Day').grid(column=4,row=1,sticky=W)
-ttk.Label(mainframe,text="days till Birthday").grid(column=2,row=2,sticky=E)
+ttk.Label(mainframe,text="days till Birthday").grid(column=2,row=2,columnspan=2,sticky=E)
 
 
 for child in mainframe.winfo_children(): child.grid_configure(padx=5,pady=5)
