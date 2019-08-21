@@ -1,6 +1,7 @@
 #https://docs.python.org/3/library/calendar.html
 import calendar as c
 import datetime as d
+import make_file
 
 def string_to_date(user):
     out = user.split('/')
@@ -23,3 +24,8 @@ def date_to_string(user):
 def int_to_day(num):
     days = ('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday')
     return days[num]
+
+
+
+def main():
+    print('yo - finish me')

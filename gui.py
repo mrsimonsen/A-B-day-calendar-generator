@@ -3,6 +3,7 @@ from  tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 import file_maker
+import AB_calc
 
 file_maker.default()
 
@@ -20,6 +21,10 @@ def add(*args):
     else:
         file_maker.new_entry(sub.get(),sd.get(),st.get(),ed.get(),et.get(),alld.get())
 
+def AB():
+    user = messagebox.askyesno(message="Have you entered in all Holidays and Special Schedule days?", title="Are you sure?", icon='question')
+    if user:
+        AB_calc.main()
 
 root = Tk()
 root.title("NUAMES Calendar Creator")
@@ -68,7 +73,9 @@ alld_yes.invoke()
 alld_no = ttk.Radiobutton(mainframe, text='Not All Day Event', variable=alld, value='False')
 alld_no.grid(column=1,row=8,sticky=(N,W))
 
-ttk.Button(mainframe,text="Add Event", command=add).grid(column=2, row=8, rowspan=2, sticky=W)
+ttk.Button(mainframe,text="Add Event", command=add).grid(column=2, row=7, rowspan=2, sticky=W)
+
+ttk.Button(mainframe, text="Generate A/B days", command=AB).grid(column=3, row=7, rowspan=2, sticky=W)
 
 root.bind('<Return>',add)
 
