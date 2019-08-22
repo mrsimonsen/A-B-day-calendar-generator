@@ -21,25 +21,31 @@ def add(*args):
     else:
         file_maker.new_entry(sub.get(),sd.get(),st.get(),ed.get(),et.get(),alld.get())
 
-def AB():
+def start_end(*args):
+    if start.get() == '' or end.get() == '':
+        messagebox.showinfo(message='Start Date and End Date are required!', title="Error!")
+    elif '/' not in start.get() or len(start.get())!=10:
+        messagebox.showinfo(message='Start Date Format must be MM/DD/YYYY', title="Error!")
+    elif '/' not in end.get() or len(end.get())!=10:
+        messagebox.showinfo(message='End Date Format must be MM/DD/YYYY', title="Error!")
+    else:
+        AB_calc.main(start.get(),end.get())
+
+def AB(*args):
     user = messagebox.askyesno(message="Have you entered in all Holidays and Special Schedule days?", title="Are you sure?", icon='question')
     if user:
         t = Toplevel(mainframe)
         t.title('Start and End Dates')
-        start = StringVar()
-        end = StringVar()
 
-        ttk.Label(t, text="First Day of School:\nMM/DD/YYYY").grid(column=1,row=1,sticky=W)
-        ttk.Entry(t, width = 10, textvariable=start).grid(column=2, row=1, sticky =(W,E))
+        ttk.Label(t,text="Please set the First and Last days of School using the MM/DD/YYYY format").grid(column=1, row=1,columnspan = 2)
 
-        ttk.Label(t, text="Last Day of School:\nMM/DD/YYYY").grid(column=1,row=2,sticky=W)
-        ttk.Entry(t,width=10,textvariable=end).grid(column=2,row=2,sticky= (W,E))
+        ttk.Label(t, text="First Day of School:\nMM/DD/YYYY").grid(column=1,row=2,sticky=W)
+        ttk.Entry(t, width = 10, textvariable=start).grid(column=2, row=2, sticky =(W,E))
 
-        ttk.Button(t,text="Calculate").grid(column)
+        ttk.Label(t, text="Last Day of School:\nMM/DD/YYYY").grid(column=1,row=3,sticky=W)
+        ttk.Entry(t,width=10,textvariable=end).grid(column=2,row=3,sticky= (W,E))
 
-
-
-        #AB_calc.main()
+        ttk.Button(t,text="Calculate",command=start_end).grid(column=1,row=4,columnspan=2)
 
 root = Tk()
 root.title("NUAMES Calendar Creator")
@@ -56,7 +62,8 @@ ed = StringVar()#end date, optional
 et = StringVar()#end time, optional
 et_ampm = StringVar()#am/pm end time
 alld = StringVar()#all day event?
-
+start = StringVar()#first day of school
+end = StringVar()#last day of school
 
 ttk.Label(mainframe, text="Event Subject:").grid(column=1,row=1,sticky=W)
 ttk.Entry(mainframe, width = 25, textvariable=sub).grid(column=2, row=1, columnspan=4,sticky =(W,E))

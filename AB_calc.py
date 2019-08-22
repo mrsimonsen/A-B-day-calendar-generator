@@ -32,13 +32,30 @@ def make_B(date):
     date = date_to_string(date)
     file_maker.new_entry("B Day",date)
 
+def format(month):
+    for i in month:
+        #remove weekends, return back
+        #remove days that are not within the start and end dates
+        pass
+    return month
+
 def school_year(start,end):
     start = string_to_date(start)
     end = string_to_date(end)
-    cal = c.Calendar(firstweekday=6)
-    days = []
-    return days
+    c.setfirstweeday(6)
+    school_days = []
+    date = start
+    while date < end:
+        month = calendar.monthdatescalendar(date.year, date.year)
+        month = format(month)
+        school_days.append(month)
+        date.month += 1
+        if date.month == 13:
+            date.month = 1
+            date.year +=1
 
-def main():
+    return school_days
+
+def main(start,end):
     #reader = file_maker.load()
     print(school_year(start,end))
