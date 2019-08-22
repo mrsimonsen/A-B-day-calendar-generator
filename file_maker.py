@@ -12,11 +12,14 @@ def default():
 #date format is MM/DD/YYYY
 
 def new_entry(sub, sd, st="", ed="", et="", alld=True):
-    with open ("AB_days.csv", "a", newline='') as f:
+    with open("AB_days.csv", "a", newline='') as f:
         w = csv.DictWriter(f, fieldnames=FN)
         w.writerow({'Subject':sub,'Start Date':sd,'Start Time':st,'End Date':ed,'End Time':et,'All Day Event':alld})
 
-def load():
-    csvfile = open("AB_days.csv",'r',newline="")
-    reader = csv.DictReader(csvfile)
-    return reader
+def load_dates():
+    with open("AB_days.csv",'r',newline="") as f:
+        r = csv.DictReader(f)
+        dates = []
+        for entry in r:
+            dates.append(entry)
+    return dates

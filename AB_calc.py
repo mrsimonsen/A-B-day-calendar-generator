@@ -32,30 +32,52 @@ def make_B(date):
     date = date_to_string(date)
     file_maker.new_entry("B Day",date)
 
-def format(month):
-    for i in month:
-        #remove weekends, return back
-        #remove days that are not within the start and end dates
-        pass
+def format(gen, start, end,m):
+    month = []
+    for day in gen:
+        if day < start or day > end:
+            pass#it's not part of the school year
+        elif day.month != m:
+            pass#it's not in the current month
+        elif day.weekday() in (5,6):
+            pass#it's a weekend
+        else:
+            month.append(day)
     return month
 
 def school_year(start,end):
     start = string_to_date(start)
     end = string_to_date(end)
-    c.setfirstweeday(6)
+    cal = c.Calendar(firstweekday=6)
     school_days = []
     date = start
+    m = date.month
+    y = date.year
     while date < end:
-        month = calendar.monthdatescalendar(date.year, date.year)
-        month = format(month)
+        gen = cal.itermonthdates(date.year, date.month)
+        month = format(gen,start,end,m)
         school_days.append(month)
-        date.month += 1
-        if date.month == 13:
-            date.month = 1
-            date.year +=1
-
+        m = date.month + 1
+        if m == 13:
+            m = 1
+            y = date.year+1
+        date = d.date(y,m,1)
     return school_days
 
 def main(start,end):
-    #reader = file_maker.load()
-    print(school_year(start,end))
+    dates = file_maker.load_dates()
+    final = []
+    for i in dates:
+        final.append(string_to_date(i['Start Date']))
+    year = school_year(start,end)
+    Aday = True
+    for month in year:
+        for day in month:
+            if day in final:
+                pass
+            elif Aday:
+                make_A(day)
+                Aday = False
+            else:
+                make_B(day)
+                Aday = True
