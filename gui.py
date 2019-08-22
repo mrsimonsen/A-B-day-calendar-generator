@@ -24,7 +24,22 @@ def add(*args):
 def AB():
     user = messagebox.askyesno(message="Have you entered in all Holidays and Special Schedule days?", title="Are you sure?", icon='question')
     if user:
-        AB_calc.main()
+        t = Toplevel(mainframe)
+        t.title('Start and End Dates')
+        start = StringVar()
+        end = StringVar()
+
+        ttk.Label(t, text="First Day of School:\nMM/DD/YYYY").grid(column=1,row=1,sticky=W)
+        ttk.Entry(t, width = 10, textvariable=start).grid(column=2, row=1, sticky =(W,E))
+
+        ttk.Label(t, text="Last Day of School:\nMM/DD/YYYY").grid(column=1,row=2,sticky=W)
+        ttk.Entry(t,width=10,textvariable=end).grid(column=2,row=2,sticky= (W,E))
+
+        ttk.Button(t,text="Calculate").grid(column)
+
+
+
+        #AB_calc.main()
 
 root = Tk()
 root.title("NUAMES Calendar Creator")
