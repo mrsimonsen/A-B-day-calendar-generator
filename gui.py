@@ -30,6 +30,9 @@ def start_end(*args):
         messagebox.showinfo(message='End Date Format must be MM/DD/YYYY', title="Error!")
     else:
         AB_calc.main(start.get(),end.get())
+        messagebox.showinfo(message='AB_days.csv created!',title="Complete")
+        root.destroy()
+
 
 def AB(*args):
     user = messagebox.askyesno(message="Have you entered in all Holidays and Special Schedule days?", title="Are you sure?", icon='question')
@@ -39,10 +42,10 @@ def AB(*args):
 
         ttk.Label(t,text="Please set the First and Last days of School using the MM/DD/YYYY format").grid(column=1, row=1,columnspan = 2)
 
-        ttk.Label(t, text="First Day of School:\nMM/DD/YYYY").grid(column=1,row=2,sticky=W)
+        ttk.Label(t, text="First Day of School:").grid(column=1,row=2,sticky=W)
         ttk.Entry(t, width = 10, textvariable=start).grid(column=2, row=2, sticky =(W,E))
 
-        ttk.Label(t, text="Last Day of School:\nMM/DD/YYYY").grid(column=1,row=3,sticky=W)
+        ttk.Label(t, text="Last Day of School:").grid(column=1,row=3,sticky=W)
         ttk.Entry(t,width=10,textvariable=end).grid(column=2,row=3,sticky= (W,E))
 
         ttk.Button(t,text="Calculate",command=start_end).grid(column=1,row=4,columnspan=2)

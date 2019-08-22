@@ -21,10 +21,6 @@ def date_to_string(user):
     out = month+'/'+day+'/'+year
     return out
 
-def int_to_day(num):
-    days = ('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday')
-    return days[num]
-
 def make_A(date):
     date = date_to_string(date)
     file_maker.new_entry("A Day",date)
